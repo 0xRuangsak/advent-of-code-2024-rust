@@ -1,3 +1,6 @@
+mod code;
+
 fn main() {
-    println!("Hello, world!");
+    let result = code::day1::solve_day_1();
+    println!("Day 1 Result: {}", result);
 }
