@@ -32,16 +32,21 @@ fn main() {
 
     println!("Part 1 Answer : {}", part1(&mut file_tuple));
 
-    fn part2(mut file_tuple: &mut (Vec<i32>, Vec<i32>)) -> i32 {
-        let mut counts = HashMap::new();
-        for &num in &file_tuple.1 {
-            *counts.entry(num).or_insert(0) += 1;
+fn part2(file_tuple: &(Vec<i32>, Vec<i32>)) -> i32 {
+    let mut counts = HashMap::new();
+
+    for &num in &file_tuple.1 {
+        *counts.entry(num).or_insert(0) += 1;
+    }
+
+    let mut result = 0;
+    for &num in &file_tuple.0 {
+        if let Some(&count) = counts.get(&num) {
+            result += num * count;
         }
-        let mut results: i32 = 0;
-        for &num in &file_tuple.1 {
-            results += num * counts[&num];
-        }
-        results
+    }
+
+    result
     }
 
     println!("Part 2 Answer : {}", part2(&mut file_tuple));
