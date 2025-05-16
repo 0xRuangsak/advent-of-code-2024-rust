@@ -1,6 +1,6 @@
 use std::{collections::HashMap, fs::read_to_string};
 
-fn main() {
+fn _main() {
     let file_vector: Vec<String> = read_to_string("input")
         .unwrap()
         .lines()
@@ -18,7 +18,7 @@ fn main() {
         })
         .unzip();
 
-    fn part1(mut file_tuple: &mut (Vec<i32>, Vec<i32>)) -> i32 {
+    fn part1(file_tuple: &mut (Vec<i32>, Vec<i32>)) -> i32 {
         file_tuple.0.sort();
         file_tuple.1.sort();
 
@@ -32,21 +32,21 @@ fn main() {
 
     println!("Part 1 Answer : {}", part1(&mut file_tuple));
 
-fn part2(file_tuple: &(Vec<i32>, Vec<i32>)) -> i32 {
-    let mut counts = HashMap::new();
+    fn part2(file_tuple: &(Vec<i32>, Vec<i32>)) -> i32 {
+        let mut counts = HashMap::new();
 
-    for &num in &file_tuple.1 {
-        *counts.entry(num).or_insert(0) += 1;
-    }
-
-    let mut result = 0;
-    for &num in &file_tuple.0 {
-        if let Some(&count) = counts.get(&num) {
-            result += num * count;
+        for &num in &file_tuple.1 {
+            *counts.entry(num).or_insert(0) += 1;
         }
-    }
 
-    result
+        let mut result = 0;
+        for &num in &file_tuple.0 {
+            if let Some(&count) = counts.get(&num) {
+                result += num * count;
+            }
+        }
+
+        result
     }
 
     println!("Part 2 Answer : {}", part2(&mut file_tuple));
